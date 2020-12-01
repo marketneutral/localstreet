@@ -8,7 +8,7 @@ This is a template library for getting the Kaggle Jane Street competition code r
 
 # Makefile
 
-make docker -- pulls kaggle image
-make data   -- sets up paths and pulls kaggle data
-make train  -- trains model
+
+- `make data`   -- sets up paths and pulls kaggle data
+- `make train` -- trains model
 

@@ -47,7 +47,7 @@ def read_train_data(
         reduce_mem_usage=True
 ):
     train_data = (
-        dt.fread('../input/jane-street-market-prediction/train.csv')
+        dt.fread('~/localstreet/input/jane-street-market-prediction/train.csv')
           .to_pandas()
     )
 

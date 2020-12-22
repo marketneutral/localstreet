@@ -2,6 +2,10 @@
 
 This is a template library for getting the Kaggle Jane Street competition code running locally. The standing assumption is that you are *already* running inside the Kaggle python docker image locally (some notes on how to that are [here](https://www.kaggle.com/c/jane-street-market-prediction/discussion/199214#1101078)).
 
+- models are defined in `model_dispatcher.py`
+- cv schemes are defined in `config.py`
+- models are trained with, for example, `python train.py --cv=pgts_baseline --model=log_reg_baseline`
+- no logging
 
 # Makefile
 

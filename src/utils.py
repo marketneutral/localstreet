@@ -46,10 +46,16 @@ def read_train_data(
         drop_zero_weights=True,
         reduce_mem_usage=True
 ):
-    train_data = (
-        dt.fread('~/localstreet/input/jane-street-market-prediction/train.csv')
-          .to_pandas()
-    )
+    try:
+        train_data = pd.read_feather(
+            '~/localstreet/input/jane-street-market-prediction/train.feather'
+        )
+    except:
+        train_data = (
+            dt.fread('~/localstreet/input/jane-street-market-prediction/train.csv')
+              .to_pandas()
+        )
+        train_data.to_feather('~/localstreet/input/jane-street-market-prediction/train.feather')
 
     if drop_zero_weights:
         train_data = train_data.query('weight > 0')

@@ -3,18 +3,30 @@ import os
 import joblib
 import numpy as np
 from sklearn.model_selection import cross_val_score
+import uuid
+import logging
+import sys
 
 import config
 import model_dispatcher
-
 from utils import read_train_data
 
+logger = logging.getLogger('')
+logger.setLevel(logging.DEBUG)
+
+
 def run(model, cv):
+    experiment_id = f'{str(uuid.uuid4())}'
+    
     train_data = read_train_data()
     cv = config.cv_schemes[cv]
     pipe  = model_dispatcher.models[model]
 
-    X = train_data[train_data.columns[train_data.columns.str.contains('feature')]].values
+    # note we pass in all data as pandas df
+    # it is up to the model pipeline
+    # to select which cols it wants
+    X = train_data
+    
     groups = train_data['date'].values
     y = (train_data['resp']>0).astype(int).values
 
@@ -29,6 +41,13 @@ def run(model, cv):
     )
     print(cv_scores)
     print(f'mean: {np.mean(cv_scores)}   std: {np.std(cv_scores)}')
+
+    # save the model for reproducibility later
+    # we haven't fit the model though, just run CV
+    joblib.dump(
+        pipe,
+        config.MODELS_PATH / f'{experiment_id}_pipe_notfitted.bin'
+    )
     
     
 if __name__ == '__main__':

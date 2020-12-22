@@ -1,4 +1,7 @@
 from cross_val import PurgedGroupTimeSeriesSplit
+from pathlib import Path
+
+MODELS_PATH = Path('~/localstreet/models')
 
 cv = PurgedGroupTimeSeriesSplit(
     n_splits=4,

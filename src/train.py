@@ -46,7 +46,7 @@ def run(model, cv):
     # we haven't fit the model though, just run CV
     joblib.dump(
         pipe,
-        config.MODELS_PATH / f'{experiment_id}_pipe_notfitted.bin'
+        f'../models/{experiment_id}_pipe_notfitted.bin'
     )
     
     
